@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 import { GraduationCap, Loader2, Mail, Lock, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -65,7 +65,7 @@ export default function AuthPage() {
             </div>
             <span className="text-2xl font-bold tracking-tight">G-ENGLISH</span>
           </div>
-          <ThemeToggle />
+          <ThemeSwitcher />
         </div>
 
         <div className="relative z-10 text-white max-w-md">
@@ -96,7 +96,7 @@ export default function AuthPage() {
       {/* Right panel — form */}
       <div className="flex-1 flex items-center justify-center p-6 lg:p-16 bg-background relative">
         <div className="absolute top-4 right-4 lg:hidden">
-          <ThemeToggle />
+          <ThemeSwitcher />
         </div>
         <div className="w-full max-w-md">
           <button

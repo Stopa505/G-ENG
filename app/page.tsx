@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 import { GraduationCap, BookOpen, TrendingUp, FileText, Bug, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function Home() {
@@ -54,7 +54,7 @@ export default function Home() {
             <span className="text-xl font-bold tracking-tight">G-ENGLISH</span>
           </div>
           <div className="flex items-center gap-3">
-            <ThemeToggle />
+            <ThemeSwitcher />
             {loading ? (
               <div className="w-20 h-9 bg-muted animate-pulse rounded-md" />
             ) : user ? (

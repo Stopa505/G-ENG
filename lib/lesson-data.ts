@@ -1,12 +1,12 @@
 import { Topic } from './supabase';
 
 export const SVOMPT_TABLE = [
-  { letter: 'S', name: 'Subject', description: 'Who or what does the action', example: 'She' },
-  { letter: 'V', name: 'Verb', description: 'The action itself', example: 'reads' },
-  { letter: 'O', name: 'Object', description: 'What receives the action', example: 'a book' },
-  { letter: 'M', name: 'Manner', description: 'How the action is done', example: 'carefully' },
-  { letter: 'P', name: 'Place', description: 'Where the action happens', example: 'in the library' },
-  { letter: 'T', name: 'Time', description: 'When the action happens', example: 'every morning' },
+  { letter: 'S', name: 'Subject', nameRu: 'Подлежащее', description: 'Кто или что выполняет действие', example: 'She' },
+  { letter: 'V', name: 'Verb', nameRu: 'Сказуемое', description: 'Само действие (глагол)', example: 'reads' },
+  { letter: 'O', name: 'Object', nameRu: 'Дополнение', description: 'На что направлено действие', example: 'a book' },
+  { letter: 'M', name: 'Manner', nameRu: 'Образ действия', description: 'Как выполняется действие (наречие)', example: 'carefully' },
+  { letter: 'P', name: 'Place', nameRu: 'Место', description: 'Где происходит действие', example: 'in the library' },
+  { letter: 'T', name: 'Time', nameRu: 'Время', description: 'Когда происходит действие', example: 'every morning' },
 ];
 
 export interface SentenceConstructorQuestion {
@@ -23,65 +23,254 @@ export const sentenceConstructorQuestions: SentenceConstructorQuestion[] = [
   {
     id: 'sc1',
     topic: 'SVOMPT',
-    instruction: 'Build a sentence in SVOMPT order:',
+    instruction: 'Составьте предложение в порядке SVOMPT:',
     words: ['every morning', 'carefully', 'She', 'a book', 'reads', 'in the library'],
     correctOrder: ['She', 'reads', 'a book', 'carefully', 'in the library', 'every morning'],
-    rule: 'SVOMPT: Subject + Verb + Object + Manner + Place + Time. In English, manner comes before place, and time comes last.',
+    rule: 'SVOMPT: Подлежащее + Глагол + Дополнение + Образ действия + Место + Время. В английском языке образ действия стоит перед местом, а время — в конце.',
     translation: 'Она внимательно читает книгу в библиотеке каждое утро.',
   },
   {
     id: 'sc2',
     topic: 'SVOMPT',
-    instruction: 'Arrange the words into correct SVOMPT order:',
+    instruction: 'Расположите слова в правильном порядке SVOMPT:',
     words: ['at school', 'quickly', 'The teacher', 'the lesson', 'explains', 'on Monday'],
     correctOrder: ['The teacher', 'explains', 'the lesson', 'quickly', 'at school', 'on Monday'],
-    rule: 'Manner (quickly) before Place (at school) before Time (on Monday). Never put manner after place in English.',
+    rule: 'Образ действия (quickly) перед Местом (at school) перед Временем (on Monday). Никогда не ставьте образ действия после места в английском.',
     translation: 'Учитель быстро объясняет урок в школе в понедельник.',
   },
   {
     id: 'sc3',
     topic: 'SVOMPT',
-    instruction: 'Build the sentence correctly:',
+    instruction: 'Постройте предложение правильно:',
     words: ['yesterday', 'beautifully', 'He', 'a song', 'sang', 'at the concert'],
     correctOrder: ['He', 'sang', 'a song', 'beautifully', 'at the concert', 'yesterday'],
-    rule: 'Subject(He) + Verb(sang) + Object(a song) + Manner(beautifully) + Place(at the concert) + Time(yesterday).',
+    rule: 'Подлежащее(He) + Глагол(sang) + Дополнение(a song) + Образ действия(beautifully) + Место(at the concert) + Время(yesterday).',
     translation: 'Он красиво спел песню на концерте вчера.',
   },
   {
     id: 'sc4',
-    topic: 'ASI',
-    instruction: 'Build an ASI question (Auxiliary + Subject + Infinitive):',
-    words: ['going', 'Are', 'to the cinema', 'you', 'tonight'],
-    correctOrder: ['Are', 'you', 'going', 'to the cinema', 'tonight'],
-    rule: 'ASI: Auxiliary(Are) + Subject(you) + main verb(going). Questions start with the auxiliary verb, not the subject.',
-    translation: 'Ты идёшь в кино сегодня вечером?',
+    topic: 'SVOMPT',
+    instruction: 'Соберите предложение по правилу SVOMPT:',
+    words: ['in the park', 'happily', 'The children', 'played', 'games', 'all day'],
+    correctOrder: ['The children', 'played', 'games', 'happily', 'in the park', 'all day'],
+    rule: 'Подлежащее + Глагол + Дополнение + Образ действия(happily) + Место(in the park) + Время(all day). Наречие образа действия всегда после дополнения.',
+    translation: 'Дети весело играли в игры в парке весь день.',
   },
   {
     id: 'sc5',
     topic: 'ASI',
-    instruction: 'Form a yes/no question using ASI rule:',
-    words: ['finish', 'Did', 'the project', 'you', 'on time'],
-    correctOrder: ['Did', 'you', 'finish', 'the project', 'on time'],
-    rule: 'ASI: Auxiliary(Did) + Subject(you) + Infinitive(finish). Use "Did" for past tense questions with the base form of the verb.',
-    translation: 'Ты закончил проект вовремя?',
+    instruction: 'Составьте вопрос ASI (Вспом. глагол + Подлежащее + Инфинитив):',
+    words: ['going', 'Are', 'to the cinema', 'you', 'tonight'],
+    correctOrder: ['Are', 'you', 'going', 'to the cinema', 'tonight'],
+    rule: 'ASI: Вспомогательный глагол(Are) + Подлежащее(you) + Основной глагол(going). Вопрос начинается со вспомогательного глагола, а не с подлежащего.',
+    translation: 'Ты идёшь в кино сегодня вечером?',
   },
   {
     id: 'sc6',
-    topic: 'QUASI',
-    instruction: 'Build a QUASI question (Question word + Auxiliary + Subject + Infinitive):',
-    words: ['going', 'Where', 'you', 'are', 'tomorrow'],
-    correctOrder: ['Where', 'are', 'you', 'going', 'tomorrow'],
-    rule: 'QUASI: Question word(Where) + Auxiliary(are) + Subject(you) + main verb(going). Wh-questions place the question word first.',
-    translation: 'Куда ты идёшь завтра?',
+    topic: 'ASI',
+    instruction: 'Образуйте yes/no вопрос по правилу ASI:',
+    words: ['finish', 'Did', 'the project', 'you', 'on time'],
+    correctOrder: ['Did', 'you', 'finish', 'the project', 'on time'],
+    rule: 'ASI: Вспом. глагол(Did) + Подлежащее(you) + Инфинитив(finish). Используйте "Did" + базовую форму глагола для прошедшего времени.',
+    translation: 'Ты закончил проект вовремя?',
   },
   {
     id: 'sc7',
+    topic: 'ASI',
+    instruction: 'Постройте вопрос ASI:',
+    words: ['going', 'Is', 'to the party', 'she', 'tomorrow'],
+    correctOrder: ['Is', 'she', 'going', 'to the party', 'tomorrow'],
+    rule: 'ASI: Вспом. глагол(Is) + Подлежащее(she) + Основной глагол(going). Для Present Continuous вопросов используется "is/are" в начале.',
+    translation: 'Она идёт на вечеринку завтра?',
+  },
+  {
+    id: 'sc8',
+    topic: 'ASI',
+    instruction: 'Составьте вопрос ASI с "Does":',
+    words: ['like', 'Does', 'he', 'coffee', 'in the morning'],
+    correctOrder: ['Does', 'he', 'like', 'coffee', 'in the morning'],
+    rule: 'ASI: Вспом. глагол(Does) + Подлежащее(he) + Инфинитив(like). После "does" используется базовая форма глагола (like, не likes).',
+    translation: 'Он любит кофе по утрам?',
+  },
+  {
+    id: 'sc9',
     topic: 'QUASI',
-    instruction: 'Form a WH-question using QUASI order:',
+    instruction: 'Составьте QUASI вопрос (Вопрос. слово + Вспом. глагол + Подлежащее + Инфинитив):',
+    words: ['going', 'Where', 'you', 'are', 'tomorrow'],
+    correctOrder: ['Where', 'are', 'you', 'going', 'tomorrow'],
+    rule: 'QUASI: Вопрос. слово(Where) + Вспом. глагол(are) + Подлежащее(you) + Основной глагол(going). Вопросительное слово всегда в начале.',
+    translation: 'Куда ты идёшь завтра?',
+  },
+  {
+    id: 'sc10',
+    topic: 'QUASI',
+    instruction: 'Образуйте WH-вопрос по правилу QUASI:',
     words: ['Why', 'she', 'did', 'leave', 'the party'],
     correctOrder: ['Why', 'did', 'she', 'leave', 'the party'],
-    rule: 'QUASI: Why(Why) + Auxiliary(did) + Subject(she) + Infinitive(leave). Question word always comes before the auxiliary.',
+    rule: 'QUASI: Почему(Why) + Вспом. глагол(did) + Подлежащее(she) + Инфинитив(leave). Вопросительное слово стоит перед вспомогательным.',
     translation: 'Почему она ушла с вечеринки?',
+  },
+  {
+    id: 'sc11',
+    topic: 'QUASI',
+    instruction: 'Постройте QUASI вопрос:',
+    words: ['What', 'doing', 'are', 'they', 'now'],
+    correctOrder: ['What', 'are', 'they', 'doing', 'now'],
+    rule: 'QUASI: Что(What) + Вспом. глагол(are) + Подлежащее(they) + Основной глагол(doing). Вопросительное слово + порядок ASI.',
+    translation: 'Что они сейчас делают?',
+  },
+  {
+    id: 'sc12',
+    topic: 'QUASI',
+    instruction: 'Составьте QUASI вопрос с "When":',
+    words: ['When', 'will', 'arrive', 'the train', 'at the station'],
+    correctOrder: ['When', 'will', 'the train', 'arrive', 'at the station'],
+    rule: 'QUASI: Когда(When) + Вспом. глагол(will) + Подлежащее(the train) + Инфинитив(arrive). Вопросительное слово первым, затем ASI.',
+    translation: 'Когда поезд прибудет на станцию?',
+  },
+];
+
+export interface TranslationQuestion {
+  id: string;
+  topic: Topic;
+  direction: 'en-ru' | 'ru-en';
+  sourceText: string;
+  correctAnswer: string;
+  hintWords: { word: string; translation: string }[];
+  rule: string;
+}
+
+export const translationQuestions: TranslationQuestion[] = [
+  {
+    id: 'tr1',
+    topic: 'SVOMPT',
+    direction: 'en-ru',
+    sourceText: 'She reads a book carefully in the library every morning.',
+    correctAnswer: 'Она внимательно читает книгу в библиотеке каждое утро',
+    hintWords: [
+      { word: 'reads', translation: 'читает' },
+      { word: 'carefully', translation: 'внимательно' },
+      { word: 'in the library', translation: 'в библиотеке' },
+    ],
+    rule: 'SVOMPT: порядок слов сохраняется. Подлежащее → Глагол → Дополнение → Образ действия → Место → Время.',
+  },
+  {
+    id: 'tr2',
+    topic: 'SVOMPT',
+    direction: 'ru-en',
+    sourceText: 'Учитель быстро объясняет урок в школе в понедельник.',
+    correctAnswer: 'The teacher explains the lesson quickly at school on Monday',
+    hintWords: [
+      { word: 'объясняет', translation: 'explains' },
+      { word: 'быстро', translation: 'quickly' },
+      { word: 'в школе', translation: 'at school' },
+    ],
+    rule: 'В английском: Subject + Verb + Object + Manner + Place + Time. Образ действия (quickly) перед местом (at school).',
+  },
+  {
+    id: 'tr3',
+    topic: 'ASI',
+    direction: 'en-ru',
+    sourceText: 'Are you coming to the party tonight?',
+    correctAnswer: 'Ты придёшь на вечеринку сегодня вечером',
+    hintWords: [
+      { word: 'Are', translation: '(вспом. глагол)' },
+      { word: 'coming', translation: 'придёшь' },
+      { word: 'tonight', translation: 'сегодня вечером' },
+    ],
+    rule: 'ASI: Вспом. глагол + Подлежащее + Глагол. На русский переводится обычным порядком слов.',
+  },
+  {
+    id: 'tr4',
+    topic: 'ASI',
+    direction: 'ru-en',
+    sourceText: 'Ты закончил проект вовремя?',
+    correctAnswer: 'Did you finish the project on time',
+    hintWords: [
+      { word: 'закончил', translation: 'finish (базовая форма!)' },
+      { word: 'вовремя', translation: 'on time' },
+      { word: '?', translation: 'Did (для прош. времени)' },
+    ],
+    rule: 'ASI для прошлого времени: Did + Подлежащее + Инфинитив. Глагол в базовой форме (finish, не finished).',
+  },
+  {
+    id: 'tr5',
+    topic: 'QUASI',
+    direction: 'en-ru',
+    sourceText: 'Where are you going tomorrow?',
+    correctAnswer: 'Куда ты идёшь завтра',
+    hintWords: [
+      { word: 'Where', translation: 'Куда' },
+      { word: 'are', translation: '(вспом. глагол)' },
+      { word: 'going', translation: 'идёшь' },
+    ],
+    rule: 'QUASI: Вопрос. слово + Вспом. глагол + Подлежащее + Глагол. На русский переводится естественно.',
+  },
+  {
+    id: 'tr6',
+    topic: 'QUASI',
+    direction: 'ru-en',
+    sourceText: 'Почему она ушла с вечеринки?',
+    correctAnswer: 'Why did she leave the party',
+    hintWords: [
+      { word: 'Почему', translation: 'Why' },
+      { word: 'ушла', translation: 'leave (базовая форма!)' },
+      { word: 'с вечеринки', translation: 'the party' },
+    ],
+    rule: 'QUASI: Why + Did + Подлежащее(she) + Инфинитив(leave). Глагол в базовой форме.',
+  },
+];
+
+export interface MatchingQuestion {
+  id: string;
+  topic: Topic;
+  instruction: string;
+  pairs: { english: string; russian: string }[];
+  rule: string;
+}
+
+export const matchingQuestions: MatchingQuestion[] = [
+  {
+    id: 'mt1',
+    topic: 'SVOMPT',
+    instruction: 'Сопоставьте английские слова с их переводом:',
+    pairs: [
+      { english: 'Subject', russian: 'Подлежащее' },
+      { english: 'Manner', russian: 'Образ действия' },
+      { english: 'Verb', russian: 'Глагол' },
+      { english: 'Place', russian: 'Место' },
+      { english: 'Object', russian: 'Дополнение' },
+      { english: 'Time', russian: 'Время' },
+    ],
+    rule: 'SVOMPT расшифровывается как: Subject (Подлежащее) → Verb (Глагол) → Object (Дополнение) → Manner (Образ действия) → Place (Место) → Time (Время).',
+  },
+  {
+    id: 'mt2',
+    topic: 'ASI',
+    instruction: 'Сопоставьте элементы вопроса ASI с переводом:',
+    pairs: [
+      { english: 'Auxiliary', russian: 'Вспомогательный глагол' },
+      { english: 'Subject', russian: 'Подлежащее' },
+      { english: 'Infinitive', russian: 'Инфинитив (базовая форма)' },
+      { english: 'Are', russian: 'Настоящее время (мн.ч.)' },
+      { english: 'Did', russian: 'Прошедшее время' },
+      { english: 'Does', russian: 'Настоящее время (3-е л.)' },
+    ],
+    rule: 'ASI = Auxiliary + Subject + Infinitive. Вспомогательный глагол определяется по времени и лицу: Are/Is/Am (Present), Did (Past), Does (Present 3rd person).',
+  },
+  {
+    id: 'mt3',
+    topic: 'QUASI',
+    instruction: 'Сопоставьте вопросительные слова с переводом:',
+    pairs: [
+      { english: 'What', russian: 'Что' },
+      { english: 'Where', russian: 'Где / Куда' },
+      { english: 'When', russian: 'Когда' },
+      { english: 'Why', russian: 'Почему' },
+      { english: 'Who', russian: 'Кто' },
+      { english: 'How', russian: 'Как' },
+    ],
+    rule: 'QUASI = Question word + Auxiliary + Subject + Infinitive. Вопросительное слово ставится в начало, затем порядок ASI.',
   },
 ];
 
@@ -99,7 +288,7 @@ export const multipleChoiceQuestions: MultipleChoiceQuestion[] = [
   {
     id: 'mc1',
     topic: 'SVOMPT',
-    question: 'Choose the correct SVOMPT sentence:',
+    question: 'Выберите правильное предложение SVOMPT:',
     options: [
       'He plays football well at the stadium on Sunday.',
       'He plays well football at the stadium on Sunday.',
@@ -107,13 +296,13 @@ export const multipleChoiceQuestions: MultipleChoiceQuestion[] = [
       'He on Sunday plays football well at the stadium.',
     ],
     correctIndex: 0,
-    rule: 'SVOMPT: Subject(He) + Verb(plays) + Object(football) + Manner(well) + Place(at the stadium) + Time(on Sunday). Manner always comes before Place.',
+    rule: 'SVOMPT: Подлежащее(He) + Глагол(plays) + Дополнение(football) + Образ действия(well) + Место(at the stadium) + Время(on Sunday). Образ действия всегда перед местом.',
     translation: 'Он хорошо играет в футбол на стадионе в воскресенье.',
   },
   {
     id: 'mc2',
     topic: 'SVOMPT',
-    question: 'Which sentence follows the SVOMPT rule correctly?',
+    question: 'Какое предложение следует правилу SVOMPT?',
     options: [
       'She every morning drinks coffee slowly at home.',
       'She drinks coffee slowly at home every morning.',
@@ -121,13 +310,13 @@ export const multipleChoiceQuestions: MultipleChoiceQuestion[] = [
       'She drinks slowly coffee at home every morning.',
     ],
     correctIndex: 1,
-    rule: 'Correct order: Subject(She) + Verb(drinks) + Object(coffee) + Manner(slowly) + Place(at home) + Time(every morning). Manner before Place before Time.',
+    rule: 'Правильный порядок: Подлежащее(She) + Глагол(drinks) + Дополнение(coffee) + Образ действия(slowly) + Место(at home) + Время(every morning).',
     translation: 'Она медленно пьёт кофе дома каждое утро.',
   },
   {
     id: 'mc3',
     topic: 'ASI',
-    question: 'Choose the correct ASI question form:',
+    question: 'Выберите правильную форму вопроса ASI:',
     options: [
       'You are coming to the party?',
       'Are you coming to the party?',
@@ -135,13 +324,13 @@ export const multipleChoiceQuestions: MultipleChoiceQuestion[] = [
       'You coming are to the party?',
     ],
     correctIndex: 1,
-    rule: 'ASI: Auxiliary(Are) + Subject(you) + main verb(coming). In English questions, the auxiliary verb moves to the front.',
+    rule: 'ASI: Вспом. глагол(Are) + Подлежащее(you) + Глагол(coming). В английских вопросах вспом. глагол переносится в начало.',
     translation: 'Ты придёшь на вечеринку?',
   },
   {
     id: 'mc4',
     topic: 'ASI',
-    question: 'Which is the correct yes/no question?',
+    question: 'Какой yes/no вопрос составлен правильно?',
     options: [
       'Does she likes ice cream?',
       'She does like ice cream?',
@@ -149,13 +338,13 @@ export const multipleChoiceQuestions: MultipleChoiceQuestion[] = [
       'Like she does ice cream?',
     ],
     correctIndex: 2,
-    rule: 'ASI: Auxiliary(Does) + Subject(she) + Infinitive(like). After "does", use the base form of the verb (like, not likes).',
+    rule: 'ASI: Вспом. глагол(Does) + Подлежащее(she) + Инфинитив(like). После "does" используется базовая форма глагола (like, не likes).',
     translation: 'Она любит мороженое?',
   },
   {
     id: 'mc5',
     topic: 'QUASI',
-    question: 'Choose the correct QUASI question:',
+    question: 'Выберите правильный QUASI вопрос:',
     options: [
       'What you are doing now?',
       'What are you doing now?',
@@ -163,13 +352,13 @@ export const multipleChoiceQuestions: MultipleChoiceQuestion[] = [
       'Are you what doing now?',
     ],
     correctIndex: 1,
-    rule: 'QUASI: Question word(What) + Auxiliary(are) + Subject(you) + main verb(doing). The question word always starts the sentence.',
+    rule: 'QUASI: Вопрос. слово(What) + Вспом. глагол(are) + Подлежащее(you) + Глагол(doing). Вопросительное слово всегда в начале.',
     translation: 'Что ты сейчас делаешь?',
   },
   {
     id: 'mc6',
     topic: 'QUASI',
-    question: 'Which WH-question is formed correctly?',
+    question: 'Какой WH-вопрос образован правильно?',
     options: [
       'Where she does live?',
       'Where does she live?',
@@ -177,13 +366,13 @@ export const multipleChoiceQuestions: MultipleChoiceQuestion[] = [
       'She does where live?',
     ],
     correctIndex: 1,
-    rule: 'QUASI: Where + Auxiliary(does) + Subject(she) + Infinitive(live). Question word first, then auxiliary, then subject, then base verb.',
+    rule: 'QUASI: Where + Вспом. глагол(does) + Подлежащее(she) + Инфинитив(live). Вопрос. слово → вспом. глагол → подлежащее → базовый глагол.',
     translation: 'Где она живёт?',
   },
   {
     id: 'mc7',
     topic: 'SVOMPT',
-    question: 'Identify the SVOMPT-correct sentence:',
+    question: 'Найдите предложение, правильное по SVOMPT:',
     options: [
       'They watched the movie quietly in the cinema last night.',
       'They quietly watched the movie in the cinema last night.',
@@ -191,13 +380,13 @@ export const multipleChoiceQuestions: MultipleChoiceQuestion[] = [
       'They last night watched the movie quietly in the cinema.',
     ],
     correctIndex: 0,
-    rule: 'Subject(They) + Verb(watched) + Object(the movie) + Manner(quietly) + Place(in the cinema) + Time(last night). Adverb of manner goes immediately after the object.',
+    rule: 'Подлежащее(They) + Глагол(watched) + Дополнение(the movie) + Образ действия(quietly) + Место(in the cinema) + Время(last night). Наречие образа действия сразу после дополнения.',
     translation: 'Они тихо смотрели фильм в кинотеатре прошлой ночью.',
   },
   {
     id: 'mc8',
     topic: 'ASI',
-    question: 'Which past tense question uses ASI correctly?',
+    question: 'Какой прошедший вопрос использует ASI правильно?',
     options: [
       'Went you to the store yesterday?',
       'You went to the store yesterday?',
@@ -205,7 +394,7 @@ export const multipleChoiceQuestions: MultipleChoiceQuestion[] = [
       'Did you went to the store yesterday?',
     ],
     correctIndex: 2,
-    rule: 'ASI: Auxiliary(Did) + Subject(you) + Infinitive(go). Use "did" + base verb (go, not went) for past tense questions.',
+    rule: 'ASI: Вспом. глагол(Did) + Подлежащее(you) + Инфинитив(go). Используйте "did" + базовый глагол (go, не went).',
     translation: 'Ты ходил в магазин вчера?',
   },
 ];
